@@ -8,6 +8,7 @@ import 'package:muy_test/model/workers_list_data.dart';
 class MainController extends GetxController {
   var employeeListData = List<Employee>().obs;
   var companyName = ''.obs;
+  var currentIndex = -1;
   TextEditingController filterText;
   CompanyModel companyModel;
 
@@ -53,5 +54,12 @@ class MainController extends GetxController {
         (Employee a, Employee b) => a.employeeWage.compareTo(b.employeeWage));
   }
 
-  getOnlyNewEmployee() {}
+  getOnlyNewEmployee() {
+    this.employeeListData.where((employee) => employee.isNew);
+  }
+
+  goToEmployeeDetail(int index) {
+    this.currentIndex = index;
+    Get.offNamed('/employeeDetail');
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:muy_test/controller/main_controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,16 +10,18 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Obx(
+          () => getListTitle(),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
-            getListTitle(),
-            SizedBox(
-              height: 16,
-            ),
-            getFilterTextView(),
+            getFilterEditText(),
             getFiltersIcon(),
             Expanded(
               child: Obx(
@@ -35,24 +38,34 @@ class HomeView extends StatelessWidget {
     return ListView.builder(
         itemCount: _mainController.employeeListData.length,
         itemBuilder: (context, index) => Card(
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 7),
-            elevation: 10.0,
+            elevation: 2.0,
             child: ListTile(
               subtitle: Text(
                 ' Id Empleado : ${_mainController.employeeListData[index].employeeId}',
+                style: GoogleFonts.roboto(
+                    fontSize: 15,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.normal),
               ),
               title: Text(
-                  ' Nombre del Empleado : ${_mainController.employeeListData[index].employeeName}'),
+                ' Nombre del Empleado : ${_mainController.employeeListData[index].employeeName}',
+                style: GoogleFonts.roboto(
+                    fontSize: 17,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.normal),
+              ),
+              onTap: () => _mainController.goToEmployeeDetail(index),
             )));
   }
 
   Text getListTitle() {
     return Text(
       'EMPLEADOS EN ${_mainController.companyName.value.toUpperCase()}',
+      style: TextStyle(fontSize: 15),
     );
   }
 
-  TextFormField getFilterTextView() {
+  TextFormField getFilterEditText() {
     return TextFormField(
       controller: _mainController.filterText,
       keyboardType: TextInputType.text,
@@ -75,7 +88,6 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      //onChanged: _mainController.searchByFilter(),
     );
   }
 
@@ -83,7 +95,7 @@ class HomeView extends StatelessWidget {
     return Row(children: [
       IconButton(
           icon: Icon(
-            Icons.filter_list_alt,
+            Icons.filter_list,
             color: Colors.grey,
           ),
           onPressed: () {

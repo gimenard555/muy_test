@@ -3,10 +3,7 @@ class CompanyModel {
   String address;
   List<Employee> employees;
 
-  CompanyModel(
-      {this.companyName,
-      this.address,
-      this.employees});
+  CompanyModel({this.companyName, this.address, this.employees});
 
   CompanyModel.fromJson(Map<String, dynamic> json) {
     this.companyName = json['company_name'];
@@ -21,14 +18,19 @@ class CompanyModel {
 }
 
 class Employee {
-
   int employeeId;
   String employeeName;
   String employeePosition;
   int employeeWage;
   List<Employee> employees;
+  bool isNew = false;
 
-  Employee({this.employeeId, this.employeeName, this.employeePosition, this.employeeWage, this.employees});
+  Employee(
+      {this.employeeId,
+      this.employeeName,
+      this.employeePosition,
+      this.employeeWage,
+      this.employees});
 
   Employee.fromJson(Map<String, dynamic> json) {
     this.employeeId = json['id'];
@@ -43,4 +45,3 @@ class Employee {
     }
   }
 }
- 
