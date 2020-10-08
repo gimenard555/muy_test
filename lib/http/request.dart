@@ -8,9 +8,7 @@ class Request {
 
   Request({this.url, this.body});
 
-  Future<http.Response> post() {
-    return http.post(urlBase + url, body: body).timeout(Duration(minutes: 2));
-  }
+  ///Metodo get http
   Future<http.Response> get() {
     return http.get(urlBase + url).timeout(Duration(minutes: 2));
   }

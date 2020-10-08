@@ -17,7 +17,7 @@ void main() {
         appBarTheme: AppBarTheme(
             color: Colors.teal,
             textTheme: TextTheme(
-              headline6: GoogleFonts.exo2(
+              headline6: GoogleFonts.robotoCondensed(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),

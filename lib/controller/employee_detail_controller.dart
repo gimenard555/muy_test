@@ -17,6 +17,7 @@ class EmployeeDetailController extends GetxController {
     super.onInit();
   }
 
+  ///Titulo para listado de empleados (Jerarquia)
   String subEmployeesTitle(Employee employee) {
     this.currentEmployee = employee;
     if (this.currentEmployee.employees.isEmpty) {
@@ -26,6 +27,7 @@ class EmployeeDetailController extends GetxController {
     }
   }
 
+  ///Se cambia interfaz de boton teniendo en cuenta la seleccion si es nuevo o no
   _getNewState() {
     if (this.currentEmployee.isNew) {
       this.isNewColor.value = Colors.teal;
@@ -38,8 +40,13 @@ class EmployeeDetailController extends GetxController {
     }
   }
 
+  ///Se actualiza el estado del empleado seleccionado
   updateIsNewState() {
     this.currentEmployee.isNew = !this.currentEmployee.isNew;
     _getNewState();
+  }
+
+  goBack() {
+    Get.back();
   }
 }

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:muy_test/controller/main_controller.dart';
 
 class HomeView extends StatelessWidget {
-  final MainController _mainController = Get.put(MainController());
+  final HomeController _mainController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: <Widget>[
             getFilterEditText(),
-            getFiltersIcon(),
+            Obx(() => getFiltersIcon()),
             Expanded(
               child: Obx(
                 () => getHolder(),
@@ -40,19 +40,20 @@ class HomeView extends StatelessWidget {
         itemBuilder: (context, index) => Card(
             elevation: 2.0,
             child: ListTile(
-              subtitle: Text(
-                ' Id Empleado : ${_mainController.employeeListData[index].employeeId}',
-                style: GoogleFonts.roboto(
-                    fontSize: 15,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal),
-              ),
               title: Text(
-                ' Nombre del Empleado : ${_mainController.employeeListData[index].employeeName}',
+                ' ${_mainController.employeeListData[index].employeeId} - Nombre: ${_mainController.employeeListData[index].employeeName}',
                 style: GoogleFonts.roboto(
                     fontSize: 17,
                     color: Colors.black54,
                     fontWeight: FontWeight.normal),
+              ),
+              trailing: Text(
+                'Salario : ${_mainController.employeeListData[index].employeeWage}',
+                textAlign: TextAlign.end,
+                style: GoogleFonts.roboto(
+                    fontSize: 17,
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold),
               ),
               onTap: () => _mainController.goToEmployeeDetail(index),
             )));
@@ -101,6 +102,11 @@ class HomeView extends StatelessWidget {
           onPressed: () {
             _mainController.getOnlyNewEmployee();
           }),
+      Text(
+        '${_mainController.filterInfo}',
+        style: GoogleFonts.roboto(
+            fontSize: 17, color: Colors.black, fontWeight: FontWeight.normal),
+      ),
       Spacer(),
       IconButton(
           icon: Icon(
@@ -110,6 +116,11 @@ class HomeView extends StatelessWidget {
           onPressed: () {
             _mainController.orderByWage();
           }),
+      Text(
+        '${_mainController.wageInfo}',
+        style: GoogleFonts.roboto(
+            fontSize: 17, color: Colors.black, fontWeight: FontWeight.normal),
+      ),
     ]);
   }
 }

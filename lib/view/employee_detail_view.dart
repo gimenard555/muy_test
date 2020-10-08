@@ -8,7 +8,7 @@ import 'package:muy_test/controller/main_controller.dart';
 import 'package:muy_test/model/workers_list_data.dart';
 
 class EmployeeDetail extends StatelessWidget {
-  final MainController _mainController = Get.find();
+  final HomeController _mainController = Get.find();
   final EmployeeDetailController _employeeController =
       Get.put(EmployeeDetailController());
 
@@ -19,7 +19,8 @@ class EmployeeDetail extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: getEmployeePosition(),
-        leading: BackButton(color: Colors.white, onPressed: () => Get.back()),
+        leading: BackButton(
+            color: Colors.white, onPressed: () => _employeeController.goBack()),
       ),
       backgroundColor: Colors.white,
       body: Card(
@@ -98,21 +99,28 @@ class EmployeeDetail extends StatelessWidget {
     return Card(
         elevation: 1.0,
         child: ListTile(
-          subtitle: Text(
-            ' Id Empleado : ${employee.employeeId}',
-            style: GoogleFonts.roboto(
-                fontSize: 15,
-                color: Colors.black54,
-                fontWeight: FontWeight.normal),
-          ),
-          title: Text(
-            ' Nombre del Empleado : ${employee.employeeName}',
-            style: GoogleFonts.roboto(
-                fontSize: 17,
-                color: Colors.black54,
-                fontWeight: FontWeight.normal),
-          ),
-        ));
+            onTap: () => {
+                  /* _mainController.goToEmployeeDetail(
+                      _mainController.employeeListData.indexOf(employee))*/
+                },
+            title: Column(children: [
+              Text(
+                ' ${employee.employeeName}',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                    fontSize: 20,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '${employee.employeeId}',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                    fontSize: 20,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold),
+              ),
+            ])));
   }
 
   Image getCustomImage() {
